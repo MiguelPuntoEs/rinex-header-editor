@@ -82,25 +82,25 @@ def parse_RINEX(lines: list[str]) -> tuple[list[str], list[str]]:
     return header, body
 
 
-def modify_header(header: list[str], rinex_header: RINEX_Header):
+def modify_header(header: list[str], rnx_hdr: RINEX_Header):
     for idx, line in enumerate(header):
         if line[60:] == 'REC # / TYPE / VERS\n':
-            header[idx] = f'{rinex_header.receiver_sn:20}{rinex_header.receiver_type:20}' \
-                f'{rinex_header.receiver_version:20}REC # / TYPE / VERS\n'
+            header[idx] = f'{rnx_hdr.receiver_sn:20}{rnx_hdr.receiver_type:20}' \
+                f'{rnx_hdr.receiver_version:20}REC # / TYPE / VERS\n'
         elif line[60:] == 'ANT # / TYPE\n':
-            antenna_type = get_antenna_IGS_code(rinex_header.antenna_type)
+            antenna_type = get_antenna_IGS_code(rnx_hdr.antenna_type)
 
-            header[idx] = f'{rinex_header.antenna_sn:<20}{antenna_type:20}                    ANT # / ' \
+            header[idx] = f'{rnx_hdr.antenna_sn:<20}{antenna_type:20}                    ANT # / ' \
                 f'TYPE\n'
         elif line[60:] == 'APPROX POSITION XYZ\n':
-            header[idx] = f'{rinex_header.position_x:14.4f}{rinex_header.position_y:14.4f}' \
-                f'{rinex_header.position_z:14.4f}                  APPROX POSITION XYZ\n'
+            header[idx] = f'{rnx_hdr.position_x:14.4f}{rnx_hdr.position_y:14.4f}' \
+                f'{rnx_hdr.position_z:14.4f}                  APPROX POSITION XYZ\n'
         # elif line[60:] == 'RINEX VERSION / TYPE\n':
         #     header_[idx] = '     3.02           OBSERVATION DATA    M: MIXED            RINEX VERSION / TYPE\n'
         elif line[60:] == 'MARKER NAME\n':
-            header[idx] = f'{rinex_header.marker_name:60}MARKER NAME\n'
+            header[idx] = f'{rnx_hdr.marker_name:60}MARKER NAME\n'
         elif line[60:] == 'MARKER TYPE\n':
-            header[idx] = f'{rinex_header.marker_type:60}MARKER TYPE\n'
+            header[idx] = f'{rnx_hdr.marker_type:60}MARKER TYPE\n'
         elif line[60:] == 'PRN / # OF OBS\n':
             header[idx] = ''
         elif line[60:] == '# OF SATELLITES\n' in line:

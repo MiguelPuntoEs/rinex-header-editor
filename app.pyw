@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
-
-from PyQt6 import QtCore
+import typing
+from PyQt6 import QtCore, QtGui
 from PyQt6.QtCore import QThread, pyqtSignal, Qt
 
 from PyQt6.QtWidgets import QApplication, QCompleter, QProgressDialog, QWidget, QVBoxLayout, QFormLayout, QLabel, QLineEdit, QHBoxLayout, \
@@ -20,9 +20,13 @@ class ReadThread(QThread):
 
     def run(self):
         with open(self.file, 'r') as f:
-            lines = f.readlines()
+            lines: list[str] = f.readlines()
+
+            header: list[str]
+            body: list[str]
             header, body = parse_RINEX(lines)
-            rinex_header = parse_header(header)
+
+            rinex_header: RINEX_Header = parse_header(header)
 
         self.read_complete.emit(
             {'header': header, 'body': body, 'rinex_header': rinex_header})
@@ -31,13 +35,13 @@ class ReadThread(QThread):
 class WriteThread(QThread):
     write_complete = pyqtSignal()
 
-    def __init__(self, file, header, body):
+    def __init__(self, file: Path, header: list[str], body: list[str]) -> None:
         super(WriteThread, self).__init__()
         self.file = file
         self.header = header
         self.body = body
 
-    def run(self):
+    def run(self) -> None:
 
         create_backup = False
 
@@ -256,20 +260,19 @@ class App(QWidget):
         self.setLayout(main_layout)
         self.show()
 
-    def dragEnterEvent(self, e):
+    def dragEnterEvent(self, e: typing.Optional[QtGui.QDragEnterEvent]):
         if e.mimeData().hasUrls:
             e.accept()
         else:
             e.ignore()
 
-    #
-    def dragMoveEvent(self, e):
+    def dragMoveEvent(self, e: typing.Optional[QtGui.QDragMoveEvent]):
         if e.mimeData().hasUrls:
             e.accept()
         else:
             e.ignore()
 
-    def dropEvent(self, e):
+    def dropEvent(self, e: typing.Optional[QtGui.QDropEvent]):
         if e.mimeData().hasUrls:
             e.accept()
             for url in e.mimeData().urls():
