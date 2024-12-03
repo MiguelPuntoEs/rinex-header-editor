@@ -1,6 +1,24 @@
 # RINEX Header Editor
 
-Minimalistic drag-and-drop Python-based app to view and edit RINEX 3.0x and RINEX 4.00 headers.
+Minimalistic drag-and-drop Python-based app to view and edit RINEX 3.0x and RINEX 4.0x headers.
+
+Format descriptions:
+
+- RINEX 2:
+  - [RINEX 2](https://files.igs.org/pub/data/format/rinex2.txt)
+  - [RINEX 2.10](https://files.igs.org/pub/data/format/rinex210.txt)
+  - [RINEX 2.11](https://files.igs.org/pub/data/format/rinex211.txt)
+- RINEX 3:
+  - [RINEX 3.00](https://files.igs.org/pub/data/format/rinex300.pdf)
+  - [RINEX 3.01](https://files.igs.org/pub/data/format/rinex301.pdf)
+  - [RINEX 3.02](https://files.igs.org/pub/data/format/rinex302.pdf)
+  - [RINEX 3.03](https://files.igs.org/pub/data/format/rinex303.pdf)
+  - [RINEX 3.04](https://files.igs.org/pub/data/format/rinex304.pdf)
+  - [RINEX 3.05](https://files.igs.org/pub/data/format/rinex305.pdf)
+- RINEX 4:
+  - [RINEX 4.00](https://files.igs.org/pub/data/format/rinex_4.00.pdf)
+  - [RINEX 4.01](https://files.igs.org/pub/data/format/rinex_4.01.pdf)
+  - [RINEX 4.02](https://files.igs.org/pub/data/format/rinex_4.02.pdf)
 
 ## Usage
 
