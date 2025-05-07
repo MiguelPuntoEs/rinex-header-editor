@@ -1,4 +1,4 @@
-from utils import get_antenna_IGS_code
+from utils.rinex import get_antenna_IGS_code
 
 
 def test_get_antenna_IGS_code():

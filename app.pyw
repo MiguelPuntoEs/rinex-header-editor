@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import QApplication, QCompleter, QProgressDialog, QWidget, 
     QPushButton, QComboBox
 
 import json
-from utils import parse_header, parse_RINEX, modify_header, RINEX_Header
+from utils.rinex import parse_header, parse_RINEX, modify_header, RINEX_Header
 
 
 class ReadThread(QThread):
